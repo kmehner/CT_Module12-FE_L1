@@ -3,6 +3,8 @@ import { Route, Routes} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {ContactContext, SelectContactContext } from './context/ContactContext';
 import Contacts from './components/Contacts';
+import ProductList from './components/ProductList';
+import NewProductForm from './components/NewProductForm';
 
 
 function App() {
@@ -35,6 +37,8 @@ function App() {
         <SelectContactContext.Provider  value={{selectContact, setSelectContact}}>
             <Routes>
               <Route path='/' element = {<Contacts/>}/>
+              <Route path='/product-list' element ={<ProductList/>}/>
+              <Route path='/product-form' element={<NewProductForm/>}/>
             </Routes>
         </SelectContactContext.Provider>
       </ContactContext.Provider>
