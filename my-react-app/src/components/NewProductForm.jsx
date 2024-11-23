@@ -1,18 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
 import useInventory from '../hooks/useInventory'
-import { useState } from 'react'
 
 const NewProductForm = () => {
 
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState(0);
     const [description, setDescription] = useState('');
-    const [image, setImage] = useState('');
     const [category, setCategory] = useState('');
+    const [image, setImage] = useState('');
     
-    const postInventory = useInventory('POST', null)
-
     const productData = { 
         "title": title, 
         "price": price, 
@@ -21,10 +18,14 @@ const NewProductForm = () => {
         "category": category
     };
 
-    const handleSubmission = (event) => {
+    const postInventory = useInventory('POST', productData)
 
-        postInventory(event, productData);
-    }
+    const handleSubmission = (event) => {
+            event.preventDefault();
+            console.log(productData);
+
+            postInventory(productData);
+        }
 
   return (
     <Container>
@@ -43,7 +44,8 @@ const NewProductForm = () => {
                 <Form.Group>
                     <Form.Label>Price:</Form.Label>
                     <Form.Control
-                        type="text"
+                    // Change the type from text to number
+                        type="number"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                     />
@@ -77,9 +79,8 @@ const NewProductForm = () => {
                 </Form.Group>
 
 
+                <Button className="shadow-sm m-1 p-1" variant="success" type="submit">Submit</Button>
 
-
-                <Button className='shadow-sm m-1 p-1' variant="success" type="submit">Submit</Button>
             </Form>
     </Container>
   )
