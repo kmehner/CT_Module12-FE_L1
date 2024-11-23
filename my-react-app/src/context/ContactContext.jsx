@@ -1,11 +1,20 @@
-import React from "react";
+import { createContext } from "react";
 
-const ContactContext = React.createContext({
-    contacts: [{contactId: 1, name: 'John Smith', email: 'john@example.com'}, {contactId: 2, name: 'Jane Doe', email: 'jane@example.com'}, {contactId: 3, name: 'Saul Goodman', email: 'bettercallsaul@example.com'}],
+export const ContactContext = createContext({
+    contacts: [{
+        contactId: 0,
+        name: '',
+        email: ''
+
+    }],
     setContacts: () => [{}]
+})
 
-    selectContacts: {},
+export const SelectContactContext = createContext({
+    selectContact: { 
+        contactId: '',
+        name: '', 
+        email: ''},
     setSelectContacts: () =>{}
 })
 
-export default ContactContext;

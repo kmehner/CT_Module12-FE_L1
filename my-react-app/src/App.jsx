@@ -1,21 +1,43 @@
 import { useState } from 'react'
-import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import {ContactContext, SelectContactContext } from './context/ContactContext';
+import Contacts from './components/Contacts';
 
 
 function App() {
-  const [contacts, setContacts] = useState([{contactId: null, name: '', email: ''}])
+  const [contacts, setContacts] = useState(
+    [{
+      contactId: 1,
+      name: 'John Smith', 
+      email: 'j@example.com'
+  }, {
+      contactId: 2,
+      name: 'Jane Doe', 
+      email: 'doe@example.com'
+  },{
+      contactId: 3,
+      name: 'Saul Goodman', 
+      email: 'justicemattersmost@example.com'
+  }])
+
+  const [selectContact, setSelectContact] = useState({
+    contactId: '',
+    name: '',
+    email: ''
+  })
+
 
 
   return (
     <>
-      <UserContexxt.Provider value={{contacts, setContacts }}>
-        <Router>
-          <Routes>
-            <Route path='/' element = {<Contacts/>}/>
-          </Routes>
-        </Router>
-      </UserContexxt.Provider>
+      <ContactContext.Provider value={{contacts, setContacts }}>
+        <SelectContactContext.Provider  value={{selectContact, setSelectContact}}>
+            <Routes>
+              <Route path='/' element = {<Contacts/>}/>
+            </Routes>
+        </SelectContactContext.Provider>
+      </ContactContext.Provider>
     </>
   )
 }
